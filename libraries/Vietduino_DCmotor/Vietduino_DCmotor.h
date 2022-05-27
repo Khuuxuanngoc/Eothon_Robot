@@ -42,6 +42,10 @@ class Vietduino_DCmotor: public Vietduino_Task
         virtual ~Vietduino_DCmotor(){}
 	void forward(unsigned char s);
 	void backward(unsigned char s);
+        
+        void forward(unsigned char s, unsigned long _runForMs_);
+	void backward(unsigned char s, unsigned long _runForMs_);
+
         void stop();
         void write(unsigned char _dir_, unsigned char _speed_);
         void write(unsigned char _dir_, unsigned char _speed_, unsigned long _runForMs_);

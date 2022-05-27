@@ -7,39 +7,24 @@
 */
 #include "Vietduino_Manager_Priority.h"
 #include "Vietduino_DCmotor.h"
+#include "Eothon_Var.h"
+#include "BluetoothMKL.h"
 
-#define PWM_PIN_FL  3
-#define DIR_PIN_FL  2
-Vietduino_DCmotor M_FL( DIR_PIN_FL, PWM_PIN_FL);
+Vietduino_DCmotor mLeft( DIR_PIN_L, PWM_PIN_L);
+Vietduino_DCmotor mRight( DIR_PIN_R, PWM_PIN_R);
+
+RobotBluetooth myRobot;
 
 void setup(){
-    M_FL.setTogglePwm();
+    Serial.begin(9600);
+    mLeft.setTogglePwm();
+    mRight.setTogglePwm();
+    myRobot.begin(&Serial,&mLeft,&mRight);
+
 }
 
 void loop(){
     VIETDUINO_UPDATE;
 
-    M_FL.write(1, 255);
-    delay(2000);
-
-    M_FL.write(1, 0);
-    delay(2000);
-
-    M_FL.write(0, 255);
-    delay(2000);
-
-    M_FL.write(0, 0);
-    delay(2000);
-
-    M_FL.write(1, 127,2000);
-    delay(4000);
-
-    M_FL.write(1, 0);
-    delay(2000);
-
-    M_FL.write(0, 127,2000);
-    delay(4000);
-
-    M_FL.write(0, 0);
-    delay(2000);
+    myRobot.loop();
 }

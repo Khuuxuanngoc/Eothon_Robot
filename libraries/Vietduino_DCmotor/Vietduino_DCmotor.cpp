@@ -88,6 +88,14 @@ void Vietduino_DCmotor::backward(unsigned char s){
 
 }
 
+void Vietduino_DCmotor::forward(unsigned char s, unsigned long _runForMs_){
+    this->write(_V_DIR_FORWARD_, s, _runForMs_);
+}
+
+void Vietduino_DCmotor::backward(unsigned char s, unsigned long _runForMs_){
+    this->write(_V_DIR_BACKWARD_, s, _runForMs_);
+}
+
 void Vietduino_DCmotor::stop(){
     if(uc_Last_Dir_Val == _V_DIR_FORWARD_){
         forward(0);
