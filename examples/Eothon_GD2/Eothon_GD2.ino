@@ -10,6 +10,7 @@
 #include "Eothon_Var.h"
 #include "BluetoothMKL.h"
 #include "SoftwareSerial.h"
+#include "FollowLine_PID.h"
 
 // Test Software Serial ok
 // SoftwareSerial  sSerial(12,13);
@@ -18,7 +19,8 @@
 Vietduino_DCmotor mLeft( DIR_PIN_L, PWM_PIN_L);
 Vietduino_DCmotor mRight( DIR_PIN_R, PWM_PIN_R);
 
-RobotBluetooth myRobot;
+// RobotBluetooth myRobot;
+FollowLine_PID myRobot;
 
 void setup(){
     Serial.begin(9600);
@@ -37,5 +39,5 @@ void setup(){
 void loop(){
     VIETDUINO_UPDATE;
 
-    myRobot.loop();
+    // myRobot.loop();
 }

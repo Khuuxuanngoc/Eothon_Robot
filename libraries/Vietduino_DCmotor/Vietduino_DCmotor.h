@@ -47,8 +47,9 @@ class Vietduino_DCmotor: public Vietduino_Task
 	void backward(unsigned char s, unsigned long _runForMs_);
 
         void stop();
-        void write(unsigned char _dir_, unsigned char _speed_);
-        void write(unsigned char _dir_, unsigned char _speed_, unsigned long _runForMs_);
+        void write(int _speed__);
+        void write(int _dir_, int _speed__);
+        void write(int _dir_, int _speed__, unsigned long _runForMs_);
         void setTogglePwm();
 
         static void run(Vietduino_Task * me);

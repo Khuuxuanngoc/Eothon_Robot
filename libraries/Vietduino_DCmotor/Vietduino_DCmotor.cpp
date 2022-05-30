@@ -108,23 +108,28 @@ void Vietduino_DCmotor::stop(){
     setPeriodUs(0);
 }
 
-void Vietduino_DCmotor::write(unsigned char _dir_, unsigned char _speed_){
+void Vietduino_DCmotor::write(int _speed__){
+    this->write(_speed__, _speed__);
+}
+
+void Vietduino_DCmotor::write(int _dir_, int _speed__){
+    uint8_t _speed_ = abs(_speed__);
     if(_speed_ == 0){
         stop();
     }else{
-        if(_dir_ == HIGH){
+        if(_dir_ > LOW){
             forward(_speed_);
         }
-        else if(_dir_ == LOW){
+        else if(_dir_ <= LOW){
             backward(_speed_);
         }
     }
 
 }
 
-void Vietduino_DCmotor::write(unsigned char _dir_, unsigned char _speed_, unsigned long _runForMs_)
+void Vietduino_DCmotor::write(int _dir_, int _speed__, unsigned long _runForMs_)
 {
-    write(_dir_, _speed_);
+    write(_dir_, _speed__);
     ul_timeRun = _runForMs_;
     _loopID_ = 0;
     setPeriodUs(0);
