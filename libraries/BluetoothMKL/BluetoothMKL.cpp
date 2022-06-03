@@ -1,5 +1,21 @@
 #ifndef BluetoothMKL_H___
 #include "BluetoothMKL.h"
+#include "Vietduino_Manager_Priority.h"
+
+enum{
+    RB_FF = 'F',
+    RB_BB = 'B',
+    RB_L = 'L',
+    RB_R = 'R',
+    RB_FL = 'G',
+    RB_FR = 'I',
+    RB_BL = 'H',
+    RB_BR = 'J'
+};
+
+RobotBluetooth::RobotBluetooth():Vietduino_Task(0, &RobotBluetooth::run){
+    Vietduino_Manager_3.add(this);
+}
 
 void RobotBluetooth::setMotorTimeOut(unsigned long tTimeOut){
     this->timeOut = tTimeOut;
@@ -44,14 +60,38 @@ void RobotBluetooth::loop(){
             this->Stop();
             break;
         
+        case RB_FL:
+            this->Turn_FL();
+            break;
+
+        case RB_FR:
+            this->Turn_FR();
+            break;
+
+        case RB_BL:
+            this->Turn_BL();
+            break;
+
+        case RB_BR:
+            this->Turn_BR();
+            break;
+
         default:
             if((tempChar >= '0') and (tempChar <= '9')){
-                this->speed_L = 255 * (tempChar - '0')/9;
-                this->speed_R = 255 * (tempChar - '0')/9;
+                this->speed_L = 255 * (tempChar - '0')/10;
+                this->speed_R = 255 * (tempChar - '0')/10;
+            }else if(tempChar == 'q'){
+                this->speed_L = 255;
+                this->speed_R = 255;
             }
             break;
         }
     }
+}
+
+void RobotBluetooth::run(Vietduino_Task *me){
+    RobotBluetooth *p_tempMe = me;
+    p_tempMe->loop();
 }
 
 void RobotBluetooth::Move_F(){
@@ -72,6 +112,26 @@ void RobotBluetooth::Turn_L(){
 void RobotBluetooth::Turn_R(){
     this->pMotor_L->forward(this->speed_L, this->timeOut);
     this->pMotor_R->backward(this->speed_R, this->timeOut);
+}
+
+void RobotBluetooth::Turn_FL(){
+    this->pMotor_L->forward(this->speed_L * this->scaleSpeed, this->timeOut);
+    this->pMotor_R->forward(this->speed_R, this->timeOut);
+}
+
+void RobotBluetooth::Turn_FR(){
+    this->pMotor_L->forward(this->speed_L, this->timeOut);
+    this->pMotor_R->forward(this->speed_R * this->scaleSpeed, this->timeOut);
+}
+
+void RobotBluetooth::Turn_BL(){
+    this->pMotor_L->backward(this->speed_L * this->scaleSpeed, this->timeOut);
+    this->pMotor_R->backward(this->speed_R, this->timeOut);
+}
+
+void RobotBluetooth::Turn_BR(){
+    this->pMotor_L->backward(this->speed_L, this->timeOut);
+    this->pMotor_R->backward(this->speed_R * this->scaleSpeed, this->timeOut);
 }
 
 void RobotBluetooth::Stop(){

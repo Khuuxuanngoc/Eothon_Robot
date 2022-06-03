@@ -1,0 +1,2 @@
+30/05/2022
+    PID_v1.h: kxn move *myInput, *myOutput, *mySetpoint to public

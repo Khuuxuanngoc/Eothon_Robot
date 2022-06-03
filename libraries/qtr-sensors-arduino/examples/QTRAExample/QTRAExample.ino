@@ -54,7 +54,7 @@ void setup()
 
   // print the calibration minimum values measured when emitters were on
   Serial.begin(9600);
-  for (uint8_t i = 0; i < SensorCount; i++)
+  for (uint8_t i = 0; i < qtr.getSensorCount(); i++)
   {
     Serial.print(qtr.calibrationOn.minimum[i]);
     Serial.print(' ');
@@ -62,7 +62,7 @@ void setup()
   Serial.println();
 
   // print the calibration maximum values measured when emitters were on
-  for (uint8_t i = 0; i < SensorCount; i++)
+  for (uint8_t i = 0; i < qtr.getSensorCount(); i++)
   {
     Serial.print(qtr.calibrationOn.maximum[i]);
     Serial.print(' ');
@@ -81,7 +81,7 @@ void loop()
   // print the sensor values as numbers from 0 to 1000, where 0 means maximum
   // reflectance and 1000 means minimum reflectance, followed by the line
   // position
-  for (uint8_t i = 0; i < SensorCount; i++)
+  for (uint8_t i = 0; i < qtr.getSensorCount(); i++)
   {
     Serial.print(sensorValues[i]);
     Serial.print('\t');

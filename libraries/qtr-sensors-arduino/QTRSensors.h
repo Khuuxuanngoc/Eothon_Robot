@@ -547,6 +547,13 @@ class QTRSensors
 
     /// \}
 
+    uint8_t getSensorCount(){ // kxn add
+      return _sensorCount;
+    }
+
+    int getValueMaxFromSensor(){
+      return _sensorCount * 1000;
+    }
   private:
 
     uint16_t emittersOnWithPin(uint8_t pin);

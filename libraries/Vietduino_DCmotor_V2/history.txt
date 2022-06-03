@@ -1,0 +1,22 @@
+30/05/2022
+    - Write((int dir, uint8_t speed))
+    ```
+    void Vietduino_DCmotor::write(int _dir_, unsigned char _speed_){
+        if(_speed_ == 0){
+            stop();
+        }else{
+            if(_dir_ > LOW){
+                forward(_speed_);
+            }
+            else if(_dir_ <= LOW){
+                backward(_speed_);
+            }
+        }
+
+    }
+    ```
+
+27/05/2022
+    - Add void setTogglePwm();
+4/10/2018
+    - Using Vietduino_Manager_3 instead of Vietduino_Manager
