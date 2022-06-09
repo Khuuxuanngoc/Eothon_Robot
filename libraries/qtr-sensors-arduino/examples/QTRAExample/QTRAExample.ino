@@ -35,8 +35,9 @@ void setup()
 {
   // configure the sensors
   qtr.setTypeAnalog();
-  qtr.setSensorPins((const uint8_t[]){A0, A1, A2, A3, A4, A5}, SensorCount);
-  qtr.setEmitterPin(2);
+  // qtr.setSensorPins((const uint8_t[]){A0, A1, A2, A3, A4, A5}, SensorCount);
+  qtr.setSensorPins((const uint8_t[]){A1, A2, A3}, 3);
+  // qtr.setEmitterPin(2);
 
   delay(500);
   pinMode(LED_BUILTIN, OUTPUT);

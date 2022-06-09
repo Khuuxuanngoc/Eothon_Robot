@@ -15,6 +15,8 @@ void Makerlabvn_I2C_Motor_Driver::begin()
   Wire.begin(); // join i2c bus (address optional for master)
   motorI2C_init();
   ReadI2cOverSerial();
+  this->MB(1,0);
+  this->MA(1,0);
 }
 
 void Makerlabvn_I2C_Motor_Driver::checkSumCalculate(str_serial_data_dcMotor *_myMotor_)

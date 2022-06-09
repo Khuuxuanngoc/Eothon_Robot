@@ -551,8 +551,8 @@ class QTRSensors
       return _sensorCount;
     }
 
-    int getValueMaxFromSensor(){
-      return _sensorCount * 1000;
+    int getValueMaxFromSensor(){  // kxn add 
+      return (_sensorCount - 1) * 1000;
     }
   private:
 

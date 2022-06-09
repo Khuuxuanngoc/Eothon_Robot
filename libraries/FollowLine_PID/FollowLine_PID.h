@@ -5,6 +5,11 @@
 #include "QTRSensors.h"
 #include "PID_v1.h"
 
+enum{
+    FollowLine_PID_BACKWARD = 0,
+    FollowLine_PID_FORWARD  = 1
+};
+
 class FollowLine_PID: public Vietduino_Task
 {
     public:
@@ -13,15 +18,16 @@ class FollowLine_PID: public Vietduino_Task
     Vietduino_DCmotor *pMotor_L;
     Vietduino_DCmotor *pMotor_R;
 
-    int speedMotorLimit = 250;
+    double speedMotorLimit;
 
     QTRSensors *pQTR_Analog;
     uint16_t positionInput;
 
     PID *pPid;
 
-    int speed_L, speed_R;
+    double speed_L, speed_R;
     unsigned long timeOut;
+    unsigned long lastTimeComputePID = 0;
 
     Stream * p_Serial;
     void begin(PID *tpPID, Stream * tp_Serial, Vietduino_DCmotor *tpMotor_L, Vietduino_DCmotor *tpMotor_R, QTRSensors *tpQTR_Analog);
